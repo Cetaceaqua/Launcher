@@ -47,8 +47,9 @@ int main()
 		system("pause");
 		return 0;
 	}
-
-	system("start netif.bat");
+	
+	system("netif.bat");
+	system("cls");
 	system(("cd /d " + shadowtenpo_path + "&& start " + shadowtenpo_path + "\\start.bat").data());
 	
 	if (!file_exists((shadowtenpo_path + "\\segatools-override.ini").data())) {
@@ -81,6 +82,7 @@ int main()
 
 	if (enable_launch_chunithm == "1") {
 		system(("cd /d " + chunithm_path + "&& start " + chunithm_path + "\\start.bat").data());
+		printf("你好，我是中二企鹅，游戏已启动! \n");
 	}
 	else {
 		printf("启动器已完成!\n");
