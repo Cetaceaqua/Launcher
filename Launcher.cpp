@@ -1,13 +1,16 @@
 ﻿#include <io.h>
 #include <string.h>
 #include <ShlObj.h>
+#include <chrono>
+#include <thread>
 
 #include "ini.h"
 using namespace mINI;
 using namespace std;
+using namespace this_thread; // sleep_for, sleep_until
+using namespace chrono; // nanoseconds, system_clock, seconds
 
-bool file_exists(const char* filename) 
-{
+bool file_exists(const char* filename) {
 	return (_access(filename, 0) == 0);
 }
 
@@ -50,10 +53,20 @@ int main()
 	
 	system("netif.bat");
 	system("cls");
-	system(("cd /d " + shadowtenpo_path + "&& start " + shadowtenpo_path + "\\start.bat").data());
+	system(("cd /d " + shadowtenpo_path + " && start " + shadowtenpo_path + "\\start.bat").data());
+	
+	for (int i = 1; i < 11; i++) {
+		printf("正在等待 segatools-override.ini 生成, 第 %d 次尝试\n", i);
+		if (file_exists((shadowtenpo_path + "\\segatools-override.ini").data())) {
+			break;
+		}
+		else {
+			sleep_for(seconds(3));
+		}
+	}
 	
 	if (!file_exists((shadowtenpo_path + "\\segatools-override.ini").data())) {
-		printf("Shadowtenpo 出现错误!\n");
+		printf("Shadowtenpo 启动失败!\n");
 		system("pause");
 		return 0;
 	}
@@ -80,8 +93,10 @@ int main()
 
 	segatools.write(segatools_structure);
 
+	system(("del /f /q " + shadowtenpo_path + "\\segatools-override.ini").data()); 
+
 	if (enable_launch_chunithm == "1") {
-		system(("cd /d " + chunithm_path + "&& start " + chunithm_path + "\\start.bat").data());
+		system(("cd /d \"" + chunithm_path + "\" && start \"" + chunithm_path + "\\start.bat\"").data());
 		printf("你好，我是中二企鹅，游戏已启动! \n");
 	}
 	else {
