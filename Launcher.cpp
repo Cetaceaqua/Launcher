@@ -93,7 +93,7 @@ int main()
 
 	segatools.write(segatools_structure);
 
-	system(("del /f /q " + shadowtenpo_path + "\\segatools-override.ini").data()); 
+	system(("del /f /q " + shadowtenpo_path + "\\segatools-override.ini").data()); //删除segatools-override.ini
 
 	if (enable_launch_chunithm == "1") {
 		system(("cd /d \"" + chunithm_path + "\" && start \"" + chunithm_path + "\\start.bat\"").data());
