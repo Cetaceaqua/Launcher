@@ -41,10 +41,7 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="icon1.ico">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="..\..\..\Chunithm\chunithm.ico">
+    <Image Include="chunithm.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
